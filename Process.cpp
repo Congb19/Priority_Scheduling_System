@@ -15,9 +15,8 @@ void Process::set(int a, int b, int c) {
 }
 
 void Process::show() {
-    cout << "priority: ";
-    cout << p << endl;
-    //cout<<"开始时间："<<start<<endl;
-    //cout<<"结束时间："<<end<<endl;
-    //cout<<"长度："<<t<<endl;
+    cout << "priority: "<< p << endl;
+    cout << "start at: " << start << endl;
+    cout << "end at: " << end << endl;
+    cout << "length: " << t << endl;
 }

@@ -26,7 +26,7 @@ int main() {
 //随机的初始化
     for(int i = 0; i < 6; i++ ) {
         st = rand() % 10;
-        et = rand() % 10;
+        et = 10 + rand() % 10;
         pt = rand() % 100;
         test[i].set(pt, st, et);
         test[i].show();

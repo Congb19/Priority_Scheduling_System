@@ -11,7 +11,8 @@ Heap::Heap() {}
 
 Heap::Heap(const Process *array, size_t size) {
     for (size_t i = 0; i < size; i++){
-        v[i] = array[i];
+        //v[i] = array[i];  //这样写不行，暂时不知道为啥。
+        v.push_back(array[i]);
     }
     v.resize(size);
 //    CreateHeap

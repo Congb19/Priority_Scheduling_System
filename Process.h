@@ -11,9 +11,10 @@ using namespace std;
 class Process {
 public:
     Process() {};
-    Process(int, int, int);
-    void set(int, int, int);
+    Process(int, int);
+    void set(int, int);
     void show();
+    int no;//编号
     int t;//长度
     int p;//优先级
     int start;//开始时间

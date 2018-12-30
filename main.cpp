@@ -1,19 +1,17 @@
 //
 // Created by Congb on 2018/12/29.
-// Heap: æœ€å°å †å®ç°ä¼˜å…ˆé˜Ÿåˆ—
-// Process: ä½œä¸šè¿›ç¨‹ç±»
+// Heap: ×îĞ¡¶ÑÊµÏÖÓÅÏÈ¶ÓÁĞ
+// Process: ×÷Òµ½ø³ÌÀà
 //
-
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
 #include <vector>
-#include "Process.h"
-#include "Heap.h"
 #include <windows.h>
 #include <time.h>
+#include "Process.h"
+#include "Heap.h"
 #define N 6
-
 using namespace std;
 
 int main() {
@@ -25,54 +23,63 @@ int main() {
     cout << "****************************************" << endl;
 
     srand(time(NULL));
-    int maintime, remaintasks = N;//æ—¶é—´è½´ã€å‰©ä½™ä»»åŠ¡æ•°é‡
-    Process test[N];//å°†è¦è¢«æ‰§è¡Œçš„è¿›ç¨‹ç»„
-    int pt = 0;//å­˜æ”¾éšæœºä¼˜å…ˆæ•°
-    bool cpu = false;//æ˜¯å¦æœ‰ä»»åŠ¡åœ¨æ‰§è¡Œ
-    int cputime = 0;//å½“å‰ä»»åŠ¡å·²è¿›è¡Œçš„æ—¶é—´
-    Process incpu;//åœ¨cpuä¸­æ‰§è¡Œçš„ä»»åŠ¡
+    int mainTime, remainTasks = N;  //Ê±¼äÖá¡¢Ê£ÓàÈÎÎñÊıÁ¿
+    Process test[N], disp[N];       //½«Òª±»Ö´ĞĞµÄ½ø³Ì×é
+    int pt, i, j;                   //´æ·ÅËæ»úÓÅÏÈÊı
+    bool cpu = false;               //ÊÇ·ñÓĞÈÎÎñÔÚÖ´ĞĞ
+    int cpuTime = 0;                //µ±Ç°ÈÎÎñÒÑ½øĞĞµÄÊ±¼ä
+    Process inCpu;                  //ÔÚcpuÖĞÖ´ĞĞµÄÈÎÎñ
 
-//    éšæœºåˆå§‹åŒ–ä¸€å †ä»»åŠ¡
-    for(int i = 0; i < N; i++ ) {
-        pt = rand() % 100;
-        test[i].set(i, pt);
+//    Ëæ»ú³õÊ¼»¯Ò»¶ÑÈÎÎñ
+    for(i = 0; i < N; i++) {
+        pt = 1 + rand() % 10;
+        test[i].set(i+1, pt);
         test[i].show();
     }
 
-//    å­˜å…¥æœ€å°å †æ„æˆçš„ä¼˜å…ˆé˜Ÿåˆ—
-    Heap minheap(test, sizeof(test)/sizeof(test[0]));
+//    ´æÈë×îĞ¡¶Ñ¹¹³ÉµÄÓÅÏÈ¶ÓÁĞ
+    Heap minHeap(test, sizeof(test)/sizeof(test[0]));
+    for(i = 0; i < N; i++) {
+        minHeap.Top().show();
+        minHeap.Pop();
+    }
     cout << "Random Tasks Generated!" << endl;
 
-//    å¼€å§‹è¿›ç¨‹
-    int k = 0;
-    cout << "Start scheduling!  ......" << endl;
-    for (maintime = 1; remaintasks <= 0; maintime++) {
-        cout << "Now time is: " << maintime << "s." << endl;
-        if (!cpu) {
-            cpu = true;
-            incpu = minheap.Top();
-            incpu.t -= maintime;
-            test[k] = incpu;
-            test[k].start = maintime;
-            minheap.Pop();
-        } else {
-            cputime++;
-            if (cputime == incpu.t) {
-                remaintasks--;
-                cpu = false;
-                test[k].end = maintime;
-                k++;
-                cputime = 0;
-            }
-        }
-        Sleep(1000);
-    }
-
-//    æœ€åå±•ç¤ºæ‰€æœ‰ä»»åŠ¡çš„è¿è¡Œæƒ…å†µ
-    for (int j = 0; j < N; j++) {
-        cout << "The " << j+1 << "Completion Process: " << endl;
-        test[j].show();
-    }
+////    ¿ªÊ¼½ø³Ì
+//    int k = 0;
+//    cout << "Start scheduling!  ......\n" << endl;
+//    for (mainTime = 1; remainTasks > 0; mainTime++) {
+//        cout << "Now time is: " << mainTime << "s." << endl;
+//        Again:
+//		if (!cpu) {
+//			remainTasks--;
+//    		cout<<"youyigerenwukaishile.**********.\n";
+//            cpu = true;
+//            inCpu = minHeap.Top();
+//            inCpu.t -= (mainTime - 1);
+//            if(inCpu.t < 0) inCpu.t = 0;
+//            disp[k] = inCpu;
+//            disp[k].start = mainTime;
+//            minHeap.Pop();
+//        } else {
+//            if (cpuTime == inCpu.t) {
+//                cout<<"youyigerenwuwanchengle.**********.\n";
+//                cpu = false;
+//                disp[k].end = mainTime;
+//                k++;
+//                cpuTime = 0;
+//                goto Again;
+//            }
+//            cpuTime++;
+//        }
+//        Sleep(1000);
+//    }
+//
+////    ×îºóÕ¹Ê¾ËùÓĞÈÎÎñµÄÔËĞĞÇé¿ö
+//    for (j = 0; j < N; j++) {
+//        cout << "The " << j+1 << "Completion Process: " << endl;
+//        disp[j].show();
+//    }
 
     cout << "Missions complete!" << endl;
     return 0;

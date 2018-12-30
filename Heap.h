@@ -16,7 +16,7 @@ public:
     Heap(const Process* array, size_t size);
     void Push(Process a);
     void Pop();
-//ä¸€äº›å‡½æ•°
+//Ò»Ð©º¯Êý
     bool Empty() const {
         return v.empty();
     }
@@ -36,3 +36,4 @@ private:
 
 
 #endif //PRIORITY_SCHEDULING_SYSTEM_HEAP_H
+

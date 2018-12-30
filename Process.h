@@ -14,11 +14,11 @@ public:
     Process(int, int);
     void set(int, int);
     void show();
-    int no;//ç¼–å·
-    int t;//é•¿åº¦
-    int p;//ä¼˜å…ˆçº§
-    int start;//å¼€å§‹æ—¶é—´
-    int end;//ç»“æŸæ—¶é—´
+    int no;//±àºÅ
+    int t;//³¤¶È
+    int p;//ÓÅÏÈ¼¶
+    int start;//¿ªÊ¼Ê±¼ä
+    int end;//½áÊøÊ±¼ä
 private:
 
 
@@ -26,3 +26,4 @@ private:
 
 
 #endif //PRIORITY_SCHEDULING_SYSTEM_PROCESS_H
+

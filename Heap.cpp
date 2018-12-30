@@ -11,21 +11,21 @@ Heap::Heap() {}
 
 Heap::Heap(const Process *array, size_t size) {
     for (size_t i = 0; i < size; i++){
-        //v[i] = array[i];  //è¿™æ ·å†™ä¸è¡Œã€‚
+        //v[i] = array[i];  //ÕâÑùÐ´²»ÐÐ¡£
         v.push_back(array[i]);
     }
     v.resize(size);
 //    CreateHeap
     if (v.size() <= 1) return;
-    for (int t = (v.size() - 1 - 1) / 2; t >= 0; t--) { // t=æ‰§è¡Œä¸‹è°ƒçš„æ¬¡æ•°
+    for (int t = (v.size() - 1 - 1) / 2; t >= 0; t--) { // t=Ö´ÐÐÏÂµ÷µÄ´ÎÊý
         Down(t);
     }
 }
 
 void Heap::Push(Process a) {
     v.push_back(a);
-    if (v.size() < 2) return; // ä¸éœ€è¦ä¸Šè°ƒ
-    Up(v.size() - 1); // ç§˜æŠ€ï¼æ— é™ä¸Šè°ƒ
+    if (v.size() < 2) return; // ²»ÐèÒªÉÏµ÷
+    Up(v.size() - 1); // ÃØ¼¼£¡ÎÞÏÞÉÏµ÷
 }
 
 void Heap::Pop() {
@@ -33,7 +33,7 @@ void Heap::Pop() {
     size_t last = v.size() - 1;
     swap(v[0], v[last]);
     v.pop_back();
-    Down(0); // ç§˜æŠ€ï¼æ— é™ä¸‹è°ƒ
+    Down(0); // ÃØ¼¼£¡ÎÞÏÞÏÂµ÷
 }
 
 void Heap::Down(size_t r) {
@@ -61,4 +61,5 @@ void Heap::Up(size_t loc) {
         else return;
     }
 }
+
 

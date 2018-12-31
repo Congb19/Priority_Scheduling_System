@@ -25,6 +25,12 @@ void Process::show() {
 }
 
 Process& Process::operator=(const Process &pp) {
-    Process a(pp.no, pp.p);
-    return a;
+    this->no = pp.no;
+    this->p = pp.p;
+    this->t = pp.t;
+    this->start = pp.start;
+    this->end = pp.end;
+    return *this;
+//    Process a(pp.no, pp.p);
+//    return a;
 }

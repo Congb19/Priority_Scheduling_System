@@ -7,6 +7,12 @@
 #include <iostream>
 using namespace std;
 
+void swap(Process &t1, Process &t2) {
+    Process temp = t1;
+    t2 = t1;
+    t1 = temp;
+}
+
 Heap::Heap() {}
 
 Heap::Heap(const Process *array, size_t size) {
@@ -14,6 +20,7 @@ Heap::Heap(const Process *array, size_t size) {
         //v[i] = array[i];  //这样写不行。
         v.push_back(array[i]);
     }
+
     v.resize(size);
 //    CreateHeap
     if (v.size() <= 1) return;

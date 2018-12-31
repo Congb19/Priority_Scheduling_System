@@ -39,6 +39,15 @@ int main() {
 
 //    存入最小堆构成的优先队列
     Heap minHeap(test, sizeof(test)/sizeof(test[0]));
+
+
+//
+//    Heap minHeap;
+//    for(i = 0; i < N; i++) {
+//        minHeap.Push(test[i]);
+//    }
+
+
     for(i = 0; i < N; i++) {
         minHeap.Top().show();
         minHeap.Pop();

@@ -50,13 +50,24 @@ void Heap::Pop() {
 void Heap::Down(size_t r) {
     size_t c = r * 2 + 1;
     while (c < v.size()) {
-        if (c + 1 < v.size() && v[c].p > v[c+1].p)  //有孩子&&左>右
-            c++;
+        if (c + 1 < v.size()) {
+            if (v[c].p > v[c+1].p) c++; //有孩子&&左>右
+            else if (v[c].p == v[c+1].p) {
+                if(v[c].no > v[c+1].no) c++;
+            }
+        }
         if(v[r].p > v[c].p) {
 //            cout << "<<<<<<<<<< No." << v[r].no << " Down!" << endl;
             swap(v[r], v[c]);
             r = c;
             c = 2 * r + 1;
+        }
+        else if (v[r].p == v[c].p) {
+            if(v[r].no > v[c].no) {
+                swap(v[r], v[c]);
+                r = c;
+                c = 2 * r + 1;
+            }
         }
         else return;
     }
@@ -66,11 +77,19 @@ void Heap::Up(size_t loc) {
     size_t r = (loc - 1) / 2;
     while (loc != 0) {
         if (v[loc].p < v[r].p) {
-//            cout << ">>>>>>>>>> No." << v[loc].no << " Up!" << endl;
+            cout << ">>>>>>>>>> No." << v[loc].no << " Up!" << endl;
             swap(v[loc], v[r]);
             loc = r;
             r = (loc - 1) / 2;
         }
+//        else if (v[loc].p == v[r].p) {
+//            if (v[loc].no < v[r].no) {
+//                cout << ">>>>>>>>>> No." << v[loc].no << " Up!" << endl;
+//                swap(v[loc], v[r]);
+//                loc = r;
+//                r = (loc - 1) / 2;
+//            }
+//        }
         else return;
     }
 }

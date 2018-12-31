@@ -11,8 +11,8 @@
 #include <time.h>
 #include "Process.h"
 #include "Heap.h"
-#define N 4
-#define W 2
+#define N 4 //每组任务个数
+#define W 2 //剩余W的时候插入新任务
 //W < N.
 using namespace std;
 
@@ -26,23 +26,24 @@ int main() {
     cout << "Press \"Enter\" to start." << endl;
 
     srand(time(NULL));
-    int mainTime, remainTasks = N + N;  //时间轴、剩余任务数量
+    int mainTime, cutInTime = 0, remainTasks = N + N;  //时间轴、剩余任务数量
     Process test[N + N], disp[N + N];       //将要被执行的进程组
     int pt, i, j;                   //存放随机优先数
     bool cpu = false;               //是否有任务在执行
     int cpuTime = 0;                //当前任务已进行的时间
     Process inCpu;                  //在cpu中执行的任务
+    int cutIn = 0;
     getchar();
     cout << "-----------------------------------------------------" << endl;
 //    随机初始化一堆任务
     for(i = 0; i < N; i++) {
-        pt = 1 + rand() % 10;
+        pt = 1 + rand() % 6;
         test[i].set(i+1, pt);
         test[i].show();
     }
 //    再随机初始化一堆待插入的任务
     for(i = N; i < N + N; i++) {
-        pt = 1 + rand() % 10;
+        pt = 1 + rand() % 6;
         test[i].set(i + 1, pt);
         test[i].show();
     }
@@ -72,18 +73,34 @@ int main() {
     cout << "Start scheduling!  ......\n" << endl;
     for (mainTime = 1; remainTasks > 0; mainTime++) {
         cout << "\nNow time is: " << mainTime << "s." << endl;
-
+        if (remainTasks == N + W && cutIn == 0) { //在当前队列中剩余不到W个任务且没有插入过的话，插入剩余的任务。(W < N)
+            cout << N << " new missions cut in. \n";
+            for(i = N; i < N + N; i++) {
+                minHeap.Push(test[i]);
+                cout << "No: " << i + 1 << " cut in. \n";
+            }
+            cutIn++;
+            cutInTime = mainTime;
+            cout << " cutInTime: " << cutInTime << " s. \n";
+        }
         Start:
 		if (!cpu) {     //如果当前没有任务在跑
             cpu = true;
             inCpu = minHeap.Top();
-            cout << "No." << inCpu.no << "start!!! \n";
-            inCpu.t -= (mainTime - 1);
-            if(inCpu.t < 0) inCpu.t = 0;
+            cout << "No." << inCpu.no << " start!!! \n";
+            if (inCpu.no < N + 1) {
+                inCpu.wait = (mainTime - 1);
+                inCpu.p -= inCpu.wait;
+            }
+            else {
+                inCpu.wait = (mainTime - cutInTime + 1);
+                inCpu.p -= inCpu.wait;
+            }
+            if(inCpu.p < 0) inCpu.p = 0;
             disp[k] = inCpu;
             disp[k].start = mainTime;
             minHeap.Pop();
-            if (inCpu.t == 0) goto EndJudge;    //如果进来的已经是等不下去(t==0)的任务的话。
+            //if (inCpu.p == 0) goto EndJudge;    //如果进来的已经是等不下去(t==0)的任务的话。
         } else {    //如果当前有任务在跑
 		    EndJudge:
             cpuTime++;
@@ -97,11 +114,7 @@ int main() {
                 if (remainTasks > 0) goto Start;    //如果还有任务，需要再判断一遍下一个。
             }
         }
-        if (remainTasks == N + W) { //在当前队列中剩余不到 W 个任务的时候，插入剩余的任务。(W < N)
-            for(i = N; i < N + N; i++) {
-                minHeap.Push(test[i]);
-            }
-        }
+
         Sleep(1000);
     }
 

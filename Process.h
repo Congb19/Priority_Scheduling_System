@@ -19,6 +19,7 @@ public:
     int p;//优先级
     int start;//开始时间
     int end;//结束时间
+    Process &operator =(const Process &);
 private:
 
 

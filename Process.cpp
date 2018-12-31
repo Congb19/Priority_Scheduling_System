@@ -23,3 +23,8 @@ void Process::show() {
     cout << "Total time cost: " << t << "." << endl;
     cout << endl;
 }
+
+Process& Process::operator=(const Process &pp) {
+    Process a(pp.no, pp.p);
+    return a;
+}

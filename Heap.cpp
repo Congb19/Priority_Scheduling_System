@@ -16,21 +16,21 @@ using namespace std;
 Heap::Heap() {}
 
 //这个构造函数是原本的堆构造方案。现在用不上它了。安息吧。
-//Heap::Heap(const Process *array, size_t size) {
-//    for (size_t i = 0; i < size; i++){
-//        //v[i] = array[i];  //这样写不行。
-//        v.push_back(array[i]);
-//        cout << "********** No." << array[i].no << " cut in!" << endl;
-//    }
-//
-//    v.resize(size);
-//    cout << "v.size= " << v.size() << endl;
-////    CreateHeap
-//    if (v.size() <= 1) return;
-//    for (int t = (v.size() - 1 - 1) / 2; t >= 0; t--) { // t=执行下调的次数
-//        Down(t);
-//    }
-//}
+Heap::Heap(const Process *array, size_t size) {
+    for (size_t i = 0; i < size; i++){
+        //v[i] = array[i];  //这样写不行。
+        v.push_back(array[i]);
+        cout << "********** No." << array[i].no << " cut in!" << endl;
+    }
+
+    v.resize(size);
+    cout << "v.size= " << v.size() << endl;
+//    CreateHeap
+    if (v.size() <= 1) return;
+    for (int t = (v.size() - 1 - 1) / 2; t >= 0; t--) { // t=执行下调的次数
+        Down(t);
+    }
+}
 
 void Heap::Push(Process a) {
     v.push_back(a);
@@ -103,7 +103,7 @@ void Heap::Up(size_t loc) {
 }
 
 void Heap::update() {
-    for (int l = 0; l < v.size(); l++) {
+    for (int l = 0; l < v.size(); l ++) {
         v[l].p --;
         v[l].wait ++;
         if (v[l].p < 0) v[l].p = 0;

@@ -13,7 +13,7 @@ using namespace std;
 class Heap {
 public:
     Heap();
-//    Heap(const Process* array, size_t size);
+    Heap(const Process* array, size_t size);
     void Push(Process a);
     void Pop();
 //Ò»Ð©º¯Êý

@@ -5,7 +5,7 @@
 #include "Process.h"
 #include <iostream>
 using namespace std;
-
+//换方案了。于是这一个构造函数没有用到。
 Process::Process(int a, int b):p(b),start(0),end(0),t(b),no(a),wait(0){
 //    a 编号
 //    b 优先级

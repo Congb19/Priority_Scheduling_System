@@ -37,13 +37,13 @@ int main() {
     getchar();
     cout << "-----------------------------------------------------" << endl;
 //    随机初始化一堆任务
-    for(i = 0; i < N; i++) {
+    for(i = 0; i < N; i ++) {
         pt = 2 + rand() % 5;
         test[i].set(i+1, pt);
         test[i].display();
     }
 //    再随机初始化一堆 待插入的任务
-    for(i = N; i < N + N; i++) {
+    for(i = N; i < N + N; i ++) {
         pt = 2 + rand() % 5;
         test[i].set(i + 1, pt);
         test[i].display();
@@ -55,7 +55,7 @@ int main() {
 
 //    把初始任务队列存入最小堆构成的优先队列
     Heap minHeap;
-    for(i = 0; i < N; i++) {
+    for(i = 0; i < N; i ++) {
         minHeap.Push(test[i]);
     }
 
@@ -74,7 +74,7 @@ int main() {
 //    开始进程
     int k = 0;
     cout << "Start scheduling!  ......\n" << endl;
-    for (mainTime = 1; remainTasks > 0; mainTime++) {
+    for (mainTime = 1; remainTasks > 0; mainTime ++) {
         cout << "\nNow time is the start of: " << mainTime << "s." << endl;
 //        实时更新优先级。
 //        for你已经被优化了。安息。
@@ -90,7 +90,7 @@ int main() {
                 minHeap.Push(test[i]);
 //                cout << "No: " << i + 1 << " cut in. \n";
             }
-            cutIn++;
+            cutIn ++;
             cutInTime = mainTime;
             cout << " cutInTime: " << cutInTime << " s. \n";
         }
@@ -117,10 +117,10 @@ int main() {
             if (cpuTime >= inCpu.t) {   //当前的运算结束
                 cout << "No." << inCpu.no <<" complete!!! \n";
                 cpu = false;
-                remainTasks--;
-                comTasks++;
+                remainTasks --;
+                comTasks ++;
                 disp[k].end = mainTime;
-                k++;
+                k ++;
                 cpuTime = 0;
                 if (remainTasks > 0) goto Start;    //如果还有任务，需要再判断一遍这一秒。
             }
@@ -131,7 +131,7 @@ int main() {
 
 //    最后展示所有任务的运行情况
     cout << "-----------------------------------------------------" << endl;
-    for (j = 0; j < N + N; j++) {
+    for (j = 0; j < N + N; j ++) {
         if (j == 0) cout << "The 1st" << " Completion Process: " << endl;
         else if (j == 1) cout << "The 2nd" << " Completion Process: " << endl;
         else if (j == 2) cout << "The 3rd" << " Completion Process: " << endl;

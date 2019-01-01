@@ -25,13 +25,20 @@ void Process::show() {
     cout << endl;
 }
 
+void Process::display() {
+    cout << "No: " << no <<" process created randomly.\n ";
+    cout << "priority: "<< p << "," << endl;
+    cout << endl;
+}
 Process& Process::operator=(const Process &pp) {
-    this->no = pp.no;
-    this->p = pp.p;
-    this->t = pp.t;
-    this->start = pp.start;
-    this->end = pp.end;
-    this->wait = pp.wait;
+    if (this!=&pp) {
+        this->no = pp.no;
+        this->p = pp.p;
+        this->t = pp.t;
+        this->start = pp.start;
+        this->end = pp.end;
+        this->wait = pp.wait;
+    }
     return *this;
 //    Process a(pp.no, pp.p);
 //    return a;

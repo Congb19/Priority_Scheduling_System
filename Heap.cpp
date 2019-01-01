@@ -42,20 +42,23 @@ void Heap::Push(Process a) {
 void Heap::Pop() {
     if (v.empty()) return;
     size_t last = v.size() - 1;
-    swap(v[0], v[last]);
+    if (v.size() > 1) swap(v[0], v[last]);
+//    cout << "No." << v[last].no << " poped from heap.\n";
     v.pop_back();
-    Down(0); // 秘技！无限下调
+    if (v.size() > 1) Down(0); // 秘技！无限下调
+//    cout << "now top is No." << v[0].no << " \n";
 }
 
 void Heap::Down(size_t r) {
     size_t c = r * 2 + 1;
     while (c < v.size()) {
-        if (c + 1 < v.size()) {
-            if (v[c].p > v[c+1].p) c++; //有孩子&&左>右
-            else if (v[c].p == v[c+1].p) {
+        if (c + 1 < v.size()) { //有两个孩子
+            if (v[c].p > v[c+1].p) c++; //左 > 右
+            else if (v[c].p == v[c+1].p) { //左 == 右
                 if(v[c].no > v[c+1].no) c++;
             }
         }
+
         if(v[r].p > v[c].p) {
 //            cout << "<<<<<<<<<< No." << v[r].no << " Down!" << endl;
             swap(v[r], v[c]);
@@ -63,13 +66,18 @@ void Heap::Down(size_t r) {
             c = 2 * r + 1;
         }
         else if (v[r].p == v[c].p) {
+//            cout << "log1\n";
             if(v[r].no > v[c].no) {
+//                cout << "<<<<<<<<<< No." << v[r].no << " Down!" << endl;
                 swap(v[r], v[c]);
                 r = c;
                 c = 2 * r + 1;
             }
+            else break;
         }
-        else return;
+        else {
+            break;
+        }
     }
 }
 
@@ -77,7 +85,7 @@ void Heap::Up(size_t loc) {
     size_t r = (loc - 1) / 2;
     while (loc != 0) {
         if (v[loc].p < v[r].p) {
-            cout << ">>>>>>>>>> No." << v[loc].no << " Up!" << endl;
+//            cout << ">>>>>>>>>> No." << v[loc].no << " Up!" << endl;
             swap(v[loc], v[r]);
             loc = r;
             r = (loc - 1) / 2;
@@ -92,4 +100,13 @@ void Heap::Up(size_t loc) {
 //        }
         else return;
     }
+}
+
+void Heap::update() {
+    for (int l = 0; l < v.size(); l++) {
+        v[l].p --;
+        v[l].wait ++;
+        if (v[l].p < 0) v[l].p = 0;
+    }
+    if (v.size() > 0) cout << "updated\n";
 }

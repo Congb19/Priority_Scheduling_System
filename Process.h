@@ -14,6 +14,7 @@ public:
     Process(int, int);
     void set(int, int);
     void show();
+    void display();
     int no;//编号
     int t;//长度
     int p;//优先级

@@ -31,6 +31,7 @@ public:
             v[i].show();
         }
     }
+    void update();
 
 private:
     vector<Process> v;

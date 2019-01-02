@@ -66,7 +66,7 @@ int main() {
 //    minHeap.show();
 //
 //    °´Ë³Ðò²é¿´¶Ñ
-//    for(i = 0; i < N; i++) {
+//    for(i = 0; i < N + N; i++) {
 //        minHeap.Top().show();
 //        minHeap.Pop();
 //    }

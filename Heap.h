@@ -17,9 +17,9 @@ public:
     void Push(Process a);
     void Pop();
 //Ò»Ð©º¯Êý
-    bool Empty() const {
-        return v.empty();
-    }
+//    bool Empty() const {
+//        return v.empty();
+//    }
     size_t Size() const {
         return v.size();
     }

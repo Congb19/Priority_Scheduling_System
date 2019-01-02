@@ -3,6 +3,8 @@
 // Heap: 最小堆实现优先队列
 // Process: 作业进程类
 //
+// 请修改encoding为GBK，可以正常阅读注释。
+//
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>

@@ -106,7 +106,7 @@ void Heap::update() {
     for (int l = 0; l < v.size(); l ++) {
         v[l].p --;
         v[l].wait ++;
-        if (v[l].p < 0) v[l].p = 0;
+//        if (v[l].p < 0) v[l].p = 0;
     }
     if (v.size() > 0) cout << "updated\n";
 }

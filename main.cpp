@@ -128,7 +128,7 @@ int main() {
             }
         }
         minHeap.update();
-        Sleep(100);
+        Sleep(1000);
     }
 
 //    最后展示所有任务的运行情况
